@@ -1,10 +1,13 @@
 Data Pull Documentation
 
 pull_Open_Close.py:
+
     last_pulled()
         Takes in a stock symbol and returns the last date that stock was pulled as well as updates that date.
+
     pull_open_close()
         Takes in a stock symbol, checks the last date it was checked, and pulls the open and close prices as well as Volume, High, and Low for that stock on that date.
+        
     write_open_close()
         Takes in a stock symbol and the open and close prices, and writes them to a file.
 
@@ -14,6 +17,7 @@ pull_Open_Close.py:
     NOTES: I maybe want to transfer how/where this data gets stored, but that is for later. DATE 10/12/24 (M/D/Y)
 
 pull_Financials.py:
+
     pull_financials()
         Takes in a stock symbol and returns the following data:
             Total Revenue, Gross Profit, Operating Income, Net Income -> Income
@@ -22,6 +26,7 @@ pull_Financials.py:
             Reconciled Cost Of Revenue, Operating Expense -> Costs
            Interest Expense, Interest Income, Tax Provision -> #Taxes
            Total Unusual Items -> Non-recurring Purchases
+
     write_financials():
         Takes in a stock symbol, calls pull_financials() and then writes it all to a CSV.
 
