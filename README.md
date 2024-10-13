@@ -4,3 +4,5 @@ This project is to do the following:
   - Pipeline Creation
   - Database entry
   - Backtesting
+
+I want this to be more of a tool to assist rather than a tradebot.
