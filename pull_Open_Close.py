@@ -12,11 +12,11 @@ from datetime import datetime
 # Call stock data -> NEEDS Start Date -> get start date from last pulled -> get end date from today -> append data to csv file
 
 
-def last_pulled(ticker): # Gets start date
+def last_pulled(ticker) -> datetime: # Gets start date
 
     # Load our dictionary containing dates
     try:
-        with open('last_pulled.pkl', 'rb') as f:
+        with open('Data\Dates_Pulled\last_pulled_Open_Close.pkl', 'rb') as f:
             loaded_dict = pickle.load(f)
         f.close()
     except(FileNotFoundError, EOFError):
@@ -32,14 +32,14 @@ def last_pulled(ticker): # Gets start date
     loaded_dict[ticker] = datetime.now().strftime("%Y-%m-%d")
 
     # Save the dictionary
-    with open('last_pulled.pkl', 'wb') as f:
+    with open('Data\Dates_Pulled\last_pulled_Open_Close.pkl', 'wb') as f:
         pickle.dump(loaded_dict, f)
     f.close()
 
     return day_pulled
 
 
-def pull_open_close(ticker):
+def pull_open_close(ticker) -> pd.DataFrame:
     start_date = last_pulled(ticker)
 
     if start_date is None:
@@ -55,9 +55,9 @@ def pull_open_close(ticker):
     return open_close_data
 
 
-def write_open_close(ticker):
+def write_open_close(ticker) -> None:
     stock_data = pull_open_close(ticker)
-    with open(f"{ticker}_Open_Close_data.csv", mode="w", newline='') as file:
+    with open(f"Data\Open_Close\{ticker}_Open_Close_data.csv", mode="w", newline='') as file:
         writer = csv.writer(file)
         writer.writerow(stock_data.columns)
         for row in stock_data.itertuples():
@@ -67,7 +67,3 @@ def write_open_close(ticker):
 
 if __name__ == "__main__":
     write_open_close("MSFT")
-
-    #stock = yf.Ticker("AAPL")
-    #df = pd.DataFrame(stock.info)
-    #print(df.columns.tolist())

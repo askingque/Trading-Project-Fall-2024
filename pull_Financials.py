@@ -1,11 +1,14 @@
 import yfinance as yf
 import pandas as pd
 
-def pull_financials(ticker):
+def pull_financials(ticker) -> pd.DataFrame:
+    #Pull data and make it into a DataFrame
     stock = yf.Ticker(ticker)
     financials = pd.DataFrame(stock.financials)
 
-    financials = financials.transpose() #get date as indexing
+    #Get date as indexing
+    financials = financials.transpose()
+
     #columns we want
     col = ['Total Revenue', 'Gross Profit', 'Operating Income', 'Net Income', #Income
            'EBITDA', 'Normalized EBITDA', #Profitability
@@ -16,11 +19,9 @@ def pull_financials(ticker):
     financials = financials[col]
     return financials
 
-def write_financials(ticker):
-    print(pull_financials(ticker).index)
-    #stock_data = pull_financials(ticker)
-    #stock_data.to_csv(f"{ticker}_Financials.csv")
-    
+def write_financials(ticker) -> None:
+    stock_data = pull_financials(ticker)
+    stock_data.to_csv(f"Data\Financials\{ticker}_Financials.csv")
 
 if __name__ == "__main__":
     write_financials("MSFT")
