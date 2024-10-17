@@ -51,6 +51,25 @@ def pull_open_close(ticker) -> pd.DataFrame:
 
     open_close_data = yf.download(ticker, start=start_date, end=datetime.now().strftime("%Y-%m-%d"))
 
+    open_close_data['Open_1Day_Lag'] = open_close_data['Open'].shift(1)
+    open_close_data['Open_1Week_Lag'] = open_close_data['Open'].shift(7)
+    open_close_data['Open_1Month_Lag'] = open_close_data['Open'].shift(30)
+    open_close_data['Open_6Month_Lag'] = open_close_data['Open'].shift(180)
+    open_close_data['Open_1Year_Lag'] = open_close_data['Open'].shift(365)
+
+    open_close_data['Close_1Day_Lag'] = open_close_data['Close'].shift(1)
+    open_close_data['Close_1Week_Lag'] = open_close_data['Close'].shift(7)
+    open_close_data['Close_1Month_Lag'] = open_close_data['Close'].shift(30)
+    open_close_data['Close_6Month_Lag'] = open_close_data['Close'].shift(180)
+    open_close_data['Close_1Year_Lag'] = open_close_data['Close'].shift(365)
+
+    open_close_data['Open_Close_Diff_Percent'] = (open_close_data['Close'] - open_close_data['Open']) / open_close_data['Open']
+    open_close_data['Open_Close_Diff_Percent_1Day_Lag'] = open_close_data['Open_Close_Diff_Percent'].shift(1)
+    open_close_data['Open_Close_Diff_Percent_1Week_Lag'] = open_close_data['Open_Close_Diff_Percent'].shift(7)
+    open_close_data['Open_Close_Diff_Percent_1Month_Lag'] = open_close_data['Open_Close_Diff_Percent'].shift(30)
+    open_close_data['Open_Close_Diff_Percent_6Month_Lag'] = open_close_data['Open_Close_Diff_Percent'].shift(180)
+    open_close_data['Open_Close_Diff_Percent_1Year_Lag'] = open_close_data['Open_Close_Diff_Percent'].shift(365)
+
     #print(f"{ticker} data saved.")
     return open_close_data
 
