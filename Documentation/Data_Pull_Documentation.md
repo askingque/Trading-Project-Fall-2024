@@ -20,7 +20,7 @@ pull_Open_Close.py:
 
 pull_Financials.py:
 
-    pull_financials()
+    pull_financials():
         Takes in a stock symbol and returns the following data:
             Total Revenue, Gross Profit, Operating Income, Net Income -> Income
             EBITDA, Normalized EBITDA, -> Profitability
@@ -36,5 +36,20 @@ pull_Financials.py:
     OUTPUT -> CSV File containing company finances.
 
     NOTES: I might want to add a way to keep track of when I make calls to pull the company finances.
+
+pull_Economics.py:
+
+    pull_economics():
+        Retrieves Federal Reserve Data
+    
+    write_economics():
+        Calls pull_economics() and then writes it all to a CSV.
+
+    INPUT -> None
+    OUTPUT -> CSV File containing Federal Reserve Data
+
+    NOTES: Might want to extend it to international economics.
+
+
 
 
